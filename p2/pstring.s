@@ -1,3 +1,5 @@
+/* 325764215 Noam Leabovich */
+
 .section .rodata
 print_first_length_msg:
     .string "first pstring length: %d, "
@@ -56,7 +58,7 @@ swapCase:
     # chekck if the char is a CapL
     cmpb $90, %al
     # not a CapL
-    jg .caseB
+    ja .caseB
     # capL
     jmp .caseA
 
@@ -65,7 +67,7 @@ swapCase:
     # we check if the char is even a letter
     cmp $64, %al
     # we go to the next char if it is not a letter
-    jng .next
+    jna .next
     # we add 32 to the val so we get the smallL version of the current letter
     leaq 32(%rax), %rbx
     movb %bl ,(%rdi)
@@ -77,11 +79,11 @@ swapCase:
     # we check if the char is even a letter
     cmp $96, %al
     # we go to the next char if it is not a letter
-    jng .next
+    jna .next
     # we check if the char is even a letter
     cmp $122, %al
     # we go to the next char if it is not a letter
-    jg .next
+    ja .next
     # we subtruct 32 from the val so we get the CapL version of the current letter
     leaq -32(%rax), %rbx
     movb %bl ,(%rdi)
@@ -126,23 +128,23 @@ pstrijcpy:
 
     # check If j < i
     cmpb %dl, %cl
-    jl .error
+    jb .error
 
     # check If str1.len  <= i
     cmpb (%rdi), %dl
-    jge .error
+    jae .error
 
     # check If str2.len  <= i
     cmpb (%rsi), %dl
-    jge .error
+    jae .error
 
     # check If str1.len  <= j
     cmpb (%rdi), %cl
-    jge .error
+    jae .error
 
     # check If str2.len  <= j
     cmpb (%rsi), %cl
-    jge .error
+    jae .error
     
 
     # we take one step foward with %rdi and %rsi so they point on the strings
@@ -152,12 +154,12 @@ pstrijcpy:
 .floop:
     # we calibrate the index i so it will be 0 when the pointers point on the index OG-i
     cmpb $0, %dl
-    jg .nextDec
+    ja .nextDec
 
 .sloop:
     # check If j < i because this is whem we stop copying
     cmpb %dl, %cl
-    jl .finish
+    jb .finish
     # we copy the char from one string to another
     movzbq (%rsi), %rax
     movb %al, (%rdi)

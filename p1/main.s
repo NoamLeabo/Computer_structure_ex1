@@ -1,3 +1,5 @@
+/* 325764215 Noam Leabovich */
+
 .extern printf
 .extern scanf
 .extern rand_num
@@ -29,7 +31,7 @@ user_loser_msg:
     .string "Game over, you lost :(. The correct answer was %d\n"
 
 user_winner_msg:
-    .string "Congratz! You Won!\n"
+    .string "Congratz! You won!\n"
 
 scanf_fmt:
     .string "%255d"

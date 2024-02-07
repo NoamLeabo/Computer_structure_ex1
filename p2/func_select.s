@@ -1,3 +1,5 @@
+/* 325764215 Noam Leabovich */
+
 .extern printf
 .extern scanf
 .extern pstrlen
@@ -139,6 +141,8 @@ run_func:
     # we print so
     je .inavInput
 
+    .printing_rout:
+
     # we print the res of the Func 
     movq $print_lengthANDstring_33_34, %rdi
     # the length of the string is in the first byte
@@ -175,8 +179,11 @@ run_func:
     movq $print_invalidInp_msg, %rdi
     xorq %rax, %rax
     call printf
-    # we exit from the Prog
-    jmp .exit
+    
+    # we move %r14 to %rax in order to print it
+    movq %r14, %rax
+    # we print the strings 
+    jmp .printing_rout
 
 
 .error:
